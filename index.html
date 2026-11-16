@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بحبك ❤️</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:radial-gradient(circle at center,#2a0a1a 0%,#0f0f12 70%);
+    color:white;text-align:center;font-family:Arial;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    overflow:hidden
+  }
+  h1{font-size:32px;margin:15px;text-shadow:0 0 20px #ff2e63}
+  p{color:#ffb3c6;margin-bottom:10px}
+  #heart{
+    position:relative;
+    width:360px;height:330px;
+    margin:10px auto;
+  }
+  .word{
+    position:absolute;
+    transform:translate(-50%,-50%) scale(0);
+    white-space:nowrap;
+    font-weight:900;
+    text-shadow:0 0 10px currentColor;
+    transition:all .45s cubic-bezier(.68,-0.55,.27,1.55);
+    opacity:0;
+  }
+  .word.show{transform:translate(-50%,-50%) scale(1);opacity:1}
+  #btn{
+    padding:16px 35px;border:none;border-radius:50px;
+    background:linear-gradient(45deg,#ff2e63,#ff6b9d);
+    color:white;font-size:22px;font-weight:bold;cursor:pointer;
+    box-shadow:0 0 25px #ff2e63;
+    animation:pulse 1.2s infinite;
+  }
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+  #heart.pulse{animation:pulse 0.8s infinite}
+  #final{font-size:26px;margin-top:10px;display:none;color:#ffd166}
+</style>
+</head>
+<body>
+
+<h1>بحبك بكل لغات العالم ❤️</h1>
+<p>دوس على الزرار والقلب هيتشكل قدامك</p>
+
+<button id="btn" onclick="startHeart()">❤️ اضغط هنا ❤️</button>
+<div id="heart"></div>
+<div id="final">❤️ بحبك ❤️</div>
+
+<script>
+var words = [
+  "بحبك","I LOVE YOU","Te amo","Je t'aime","Ti amo",
+  "Ich liebe dich","Eu te amo","Saranghae","Wo ai ni",
+  "Seni seviyorum","Mahal kita","Aku cinta kamu",
+  "Jag älskar dig","Ik hou van jou","Kocham cię"
+];
+var colors = ["#ff2e63","#ff6b9d","#ffd166","#ffffff","#ff9f43","#ff69b4","#ff4757"];
+
+var heart = document.getElementById("heart");
+var btn = document.getElementById("btn");
+var finalText = document.getElementById("final");
+
+// نجهز 140 نقطة على شكل قلب مظبوط
+var points = [];
+for(var i=0;i<140;i++){
+  var t = Math.random()*Math.PI*2;
+  // معادلة القلب الحقيقية
+  var x = 16*Math.pow(Math.sin(t),3

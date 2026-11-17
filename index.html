@@ -1,49 +1,45 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>اختاري كارت ❤️</title>
+<title>اختاري كارت</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#0f0f12;color:white;text-align:center;font-family:Arial;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-  h1{font-size:30px;margin:10px}
-  p{color:#ffb3c6;margin-bottom:20px;font-size:18px}
-  .cards{display:flex;gap:15px;justify-content:center}
-  .card{
-    width:110px;height:170px;cursor:pointer;
-    perspective:1000px;
-  }
-  .inner{
-    width:100%;height:100%;position:relative;
-    transform-style:preserve-3d;transition:0.8s;
-  }
-  .card.flip .inner{transform:rotateY(180deg)}
-  .front,.back{
-    position:absolute;width:100%;height:100%;backface-visibility:hidden;
-    border-radius:15px;display:flex;align-items:center;justify-content:center;
-    font-size:40px;font-weight:bold;text-align:center;padding:10px;
-  }
-  .front{
-    background:linear-gradient(45deg,#ff2e63,#ff6b9d);
-    box-shadow:0 0 20px #ff2e63;
-    font-size:60px;
-  }
-  .back{
-    background:white;color:#ff2e63;transform:rotateY(180deg);
-    font-size:16px;line-height:1.4;flex-direction:column;
-  }
-  .back span{font-size:35px}
-  #msg{margin-top:20px;font-size:24px;display:none;color:#ffd166}
-  .heart{position:fixed;top:-20px;animation:fall 3s linear forwards;font-size:25px;pointer-events:none}
-  @keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+body{background:#0f0f12;color:white;text-align:center;font-family:Arial;padding:20px}
+h1{font-size:30px}
+p{color:#ffb3c6;margin:10px}
+.cards{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.card{
+  width:110px;height:170px;background:#ff2e63;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:50px;cursor:pointer;user-select:none;
+}
+.card.open{background:white;color:#ff2e63;font-size:18px;font-weight:bold;padding:10px}
+#msg{margin-top:20px;font-size:24px;display:none;color:#ffd166}
 </style>
 </head>
 <body>
 <h1>اختاري كارت 🃏</h1>
-<p>اختاري أي كارت، وشوفي حظك هيطلعلك ايه</p>
-
+<p>دوسي على أي كارت</p>
 <div class="cards">
-  <div class="card" onclick="pick(this)"><div class="inner"><div class="front">❤️</div><div class="back"><span>❤️</span>كسبتي<br>قلب عبدو<br>كله</div></div></div>
-  <div class="card" onclick="pick(this)"><div class="inner"><div class="front">❤️</div><div class="back"><span>❤️</span>كسبتي<br>قلب عبدو<br>كله</div></div></div>
-  <div class="card" onclick="pick(this)"><div class="inner"><div class="front">❤️</
+  <div class="card">❤️</div>
+  <div class="card">❤️</div>
+  <div class="card">❤️</div>
+</div>
+<div id="msg">مبروك كسبتي قلب عبدو كله ❤️</div>
+<script>
+var cards = document.querySelectorAll(".card");
+var done = false;
+for(var i=0;i<cards.length;i++){
+  cards[i].addEventListener("click", function(){
+    if(done) return;
+    done = true;
+    this.classList.add("open");
+    this.textContent = "كسبتي قلب عبدو كله ❤️";
+    document.getElementById("msg").style.display = "block";
+    alert("مبروك ❤️");
+  });
+}
+</script>
+</body>
+</html>

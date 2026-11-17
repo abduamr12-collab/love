@@ -8,36 +8,58 @@
 body{background:#0f0f12;color:white;text-align:center;font-family:Arial;padding:20px}
 h1{font-size:30px}
 p{color:#ffb3c6;margin:10px}
-.cards{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.cards{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
 .card{
-  width:110px;height:170px;background:#ff2e63;border-radius:15px;
-  display:flex;align-items:center;justify-content:center;
+  width:115px;height:175px;background:linear-gradient(45deg,#ff2e63,#ff6b9d);
+  border-radius:15px;display:flex;align-items:center;justify-content:center;
   font-size:50px;cursor:pointer;user-select:none;
+  box-shadow:0 0 20px #ff2e63;transition:0.3s;
 }
-.card.open{background:white;color:#ff2e63;font-size:18px;font-weight:bold;padding:10px}
-#msg{margin-top:20px;font-size:24px;display:none;color:#ffd166}
+.card:active{transform:scale(0.95)}
+.card.open{background:white;color:#ff2e63;font-size:17px;font-weight:bold;padding:12px;line-height:1.5}
+#msg{margin-top:20px;font-size:22px;display:none;color:#ffd166}
+.heart{position:fixed;top:-20px;animation:fall 3s linear forwards;font-size:25px;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh);opacity:0}}
 </style>
 </head>
 <body>
 <h1>اختاري كارت 🃏</h1>
-<p>دوسي على أي كارت</p>
+<p>افتحي الـ 3 كروت، كل كارت فيه مفاجأة</p>
+
 <div class="cards">
-  <div class="card">❤️</div>
-  <div class="card">❤️</div>
-  <div class="card">❤️</div>
+  <div class="card" data-msg="بحبك ❤️">❤️</div>
+  <div class="card" data-msg="انتي أحلى حاجة حصلتلي في حياتي ❤️">❤️</div>
+  <div class="card" data-msg="كسبتي قلب عبدو كله ❤️">❤️</div>
 </div>
-<div id="msg">مبروك كسبتي قلب عبدو كله ❤️</div>
+
+<div id="msg">فتحتيهم كلهم؟ يبقى انتي كسبتي كل حاجة ❤️</div>
+
 <script>
 var cards = document.querySelectorAll(".card");
-var done = false;
+var opened = 0;
 for(var i=0;i<cards.length;i++){
   cards[i].addEventListener("click", function(){
-    if(done) return;
-    done = true;
+    // لو الكارت ده اتفتح قبل كده متعملش حاجة
+    if(this.classList.contains("open")) return;
     this.classList.add("open");
-    this.textContent = "كسبتي قلب عبدو كله ❤️";
-    document.getElementById("msg").style.display = "block";
-    alert("مبروك ❤️");
+    this.textContent = this.getAttribute("data-msg");
+    opened++;
+    // قلوب بتطير مع كل كارت
+    for(var j=0;j<20;j++){
+      (function(j){
+        setTimeout(function(){
+          var h = document.createElement("div");
+          h.className = "heart";
+          h.textContent = "❤️";
+          h.style.left = Math.random()*100 + "vw";
+          document.body.appendChild(h);
+          setTimeout(function(){h.remove()},3000);
+        }, j*50);
+      })(j);
+    }
+    if(opened === 3){
+      document.getElementById("msg").style.display = "block";
+    }
   });
 }
 </script>
